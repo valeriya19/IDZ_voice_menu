@@ -1,17 +1,16 @@
 package com.mobile;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+
 
 public class Menu {
     private String title;
     private List<Menu> fields = new ArrayList<Menu>();
     private boolean first = false;
 
-    public Menu(String title, Menu... fields) {
+    public Menu(String title) {
         this.title = title;
-        this.fields = new ArrayList<Menu>(Arrays.asList(fields));
+        this.fields = new ArrayList<Menu>();
     }
 
     public boolean isFirst(){
@@ -34,26 +33,24 @@ public class Menu {
         fields.add(menu);
     }
 
-    @Override
     public String toString() {
-        final StringBuilder menuDescription = new StringBuilder();
-        menuDescription.append("-------------------\n");
-        menuDescription.append(this.title + "\n");
-        menuDescription.append("-------------------\n");
+        String menuDescription = "";
+        menuDescription += "-------------------\n";
+        menuDescription += this.title + "\n";
+        menuDescription += "-------------------\n";
 
         if (!isFirst())
-            menuDescription.append("0. Назад\n");
+            menuDescription += "0. Назад\n";
         else
-            menuDescription.append("0. Выход\n");
+            menuDescription += "0. Выход\n";
 
-        int i = 1;
-        for(Menu menu : fields){
-            menuDescription.append(i++ + ". " + menu.getTitle() + "\n");
+        for(int i = 0; i < fields.size(); i++){
+            menuDescription += (i+1) + ". " + fields.get(i).getTitle() + "\n";
         }
 
         if (fields.size() != 0)
-            menuDescription.append("-------------------\n");
+            menuDescription += "-------------------\n";
 
-        return menuDescription.toString();
+        return menuDescription;
     }
 }
